@@ -21,7 +21,7 @@ public class FilterStream {
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        final Topology topology = filterMpiUpdateTopology("mpi-updates", "mpi-cancelled");
+        final Topology topology = filterMpiUpdateTopology("mpi-updates", "mpi-canceled");
         final KafkaStreams streams = new KafkaStreams(topology, props);
         final CountDownLatch latch = new CountDownLatch(1);
 
