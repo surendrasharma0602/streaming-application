@@ -21,7 +21,7 @@ public class FilterStream {
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        final Topology topology = filterMpiUpdateTopology("mpi-updates", "mpi-cancelled");
+        final Topology topology = filterMpiUpdateTopology("mpi-updates", "mpi-canceled");
         final KafkaStreams streams = new KafkaStreams(topology, props);
         final CountDownLatch latch = new CountDownLatch(1);
 
@@ -49,7 +49,7 @@ public class FilterStream {
         builder
                 .stream(inputTopic, Consumed.with(stringSerde, stringSerde))
                 .peek((k, v) -> System.out.println("Processing mpi update event: " + v))
-                .filter((k, v) -> v.contains("cancelled"))
+                .filter((k, v) -> v.contains("canceled"))
                 .peek((k, v) -> System.out.println("Transformed event: " + v))
                 .to(outputTopic, Produced.with(stringSerde, stringSerde));
         return builder.build();
