@@ -49,7 +49,7 @@ public class FilterStream {
         builder
                 .stream(inputTopic, Consumed.with(stringSerde, stringSerde))
                 .peek((k, v) -> System.out.println("Processing mpi update event: " + v))
-                .filter((k, v) -> v.contains("cancelled"))
+                .filter((k, v) -> v.contains("canceled"))
                 .peek((k, v) -> System.out.println("Transformed event: " + v))
                 .to(outputTopic, Produced.with(stringSerde, stringSerde));
         return builder.build();
